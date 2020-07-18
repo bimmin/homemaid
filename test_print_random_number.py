@@ -22,4 +22,5 @@ class TestPrintRandomNumber(unittest.TestCase):
         self.assertEqual(result, 'five')
 
 
+#Comment this if we run pytest
 unittest.main()

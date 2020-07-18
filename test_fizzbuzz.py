@@ -27,4 +27,5 @@ class TestFizzBuzz(unittest.TestCase):
         self.assertEqual(result, 'FizzBuzz')
 
 
+#Comment this if we run pytest
 unittest.main()
