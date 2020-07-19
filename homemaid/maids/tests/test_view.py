@@ -4,6 +4,8 @@ from unittest.mock import patch
 from django.test import TestCase
 from django.urls import reverse
 
+from rest_framework.test import APIClient
+
 from ..models import Maid
 
 
@@ -154,3 +156,9 @@ class TestMaidAddView(TestCase):
                                      'from@example.com',
                                      ['to@example.com'],
                                      fail_silently=False)
+
+class TestMaidAPIView(TestCase):
+    def test_api_should_return_200(self):
+        client = APIClient()
+        response = client.get(reverse('maid-list-api'))
+        assert response.status_code == 200
