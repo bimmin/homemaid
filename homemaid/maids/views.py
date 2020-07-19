@@ -16,10 +16,9 @@ class MaidListView(View):
 
 
 def maid_another_list_view(request):
+    template_name = 'maid_list.html'
     if request.method == 'GET':
-        html = ''
-        maids = Maid.objects.all()
-        for maid in maids:
-            html += f'<li>{maid.name}</li>'
-
-        return HttpResponse(html)
+        context = {
+            'maid_list': Maid.objects.all()
+        }
+        return render(request, template_name, context)
