@@ -6,24 +6,13 @@ from .models import Maid
 
 
 class MaidListView(View):
+    template_name = 'maid_list.html'
+
     def get(self, request):
-        # html = ''
-        # maids = Maid.objects.all()
-        # for maid in maids:
-        #     html += f'<li>{maid.name}</li>'
-
-        # return HttpResponse(html)
-
-        maid_list = []
-        maids = Maid.objects.all()
-        for maid in maids:
-            maid_list.append(maid.name)
-
-        template_name = 'maid_list.html'
         context = {
-            'maid_list': maid_list
+            'maid_list': Maid.objects.all()
         }
-        return render(request, template_name, context)
+        return render(request, self.template_name, context)
 
 
 def maid_another_list_view(request):
