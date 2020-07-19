@@ -162,3 +162,29 @@ class TestMaidAPIView(TestCase):
         client = APIClient()
         response = client.get(reverse('maid-list-api'))
         assert response.status_code == 200
+
+    def test_api_view_should_return_maid_list(self):
+        #Given
+        Maid.objects.create(
+            name='Bimmin',
+            birthdate=date(1998, 4, 29),
+            description='Super Maid of the year',
+            cartificate='Best Maid 2020',
+            salary=3000
+        )
+        Maid.objects.create(
+            name='Bb',
+            birthdate=date(1998, 9, 30),
+            description='Ultra Maid of the year',
+            cartificate='Best Maid 2022',
+            salary=3200
+        )
+
+        #When
+        client = APIClient()
+        response = self.client.get(reverse('maid-list-api'))
+
+        #Then
+        print(dir(response))
+        print(response.data)
+        assert response.data == [{'id': 1, 'name': 'Bimmin'}, {'id': 2, 'name': 'Bb'}]
