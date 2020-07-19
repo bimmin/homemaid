@@ -66,4 +66,15 @@ class TestMaidListAnotherView(TestCase):
         assert '<li>Bb</li>' in str(response.content)
 
 
+class TestMaidAddView(TestCase):
+    def test_view_should_respond_200(self):
+        response = self.client.get(reverse('maid-add'))
+        assert response.status_code == 200
 
+    def test_view_should_have_maid_form(self):
+        response = self.client.get(reverse('maid-add'))
+
+        print(response.content)
+        assert '<form action="." method="POST">' in str(response.content)
+        assert '<input type="text" name="name" maxlength="300" required id="id_name">' in str(response.content)
+        assert '<button class="btn btn-primary" type="submit">Submit</button>' in str(response.content)

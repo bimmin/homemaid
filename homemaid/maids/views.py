@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 
+from .forms import MaidForm
 from .models import Maid
 
 
@@ -22,3 +23,14 @@ def maid_another_list_view(request):
             'maid_list': Maid.objects.all()
         }
         return render(request, template_name, context)
+
+
+class MaidAddView(View):
+    template_name = 'maid_add.html'
+
+    def get(self, request):
+        form = MaidForm()
+        context = {
+            'form': form
+        }
+        return render(request, self.template_name, context)
