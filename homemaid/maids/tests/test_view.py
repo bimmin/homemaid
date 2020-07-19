@@ -1,4 +1,6 @@
 from datetime import date
+from unittest.mock import patch
+
 from django.test import TestCase
 from django.urls import reverse
 
@@ -93,3 +95,16 @@ class TestMaidAddView(TestCase):
         maid = Maid.objects.last()
 
         assert maid.name == 'Bimmin'
+
+    @patch('maids.views.send_mail')
+    def test_after_submit_form_email_should_be_sent(self, mock):
+        data = {
+            'name': 'Bimmin'
+        }
+        self.client.post(reverse('maid-add'), data=data)
+
+        mock.assert_called_once_with('Subject here',
+                                     'Here is the message.',
+                                     'from@example.com',
+                                     ['to@example.com'],
+                                     fail_silently=False)

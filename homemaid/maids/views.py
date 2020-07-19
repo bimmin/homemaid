@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
@@ -39,6 +40,13 @@ class MaidAddView(View):
         # data = request.POST
         # Maid.objects.create(name=data['name'])
 
+        send_mail(
+            'Subject here',
+            'Here is the message.',
+            'from@example.com',
+            ['to@example.com'],
+            fail_silently=False,
+        )
 
         form = MaidForm(request.POST)
         if form.is_valid():
