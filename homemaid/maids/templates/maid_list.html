@@ -1,3 +1,14 @@
-{% for maid in maid_list%}
-<li>{{ maid.name }}</li>
-{% endfor %}
+{% load static%}
+<html>
+<head>
+    <title>Maid List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist/css/bootstrap.min.css' %}">
+</head>
+<body>
+    {% for maid in maid_list%}
+    <li>{{ maid.name }}</li>
+    {% endfor %}
+
+    <script src="{% static 'bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"</script>
+</body>
+</html>

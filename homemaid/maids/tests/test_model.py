@@ -49,7 +49,7 @@ class TestMaid(TestCase):
         #Then
         assert maid.profile_image.name == 'profile.png'
 
-        os.remove('profile.png')
+        os.remove('media/profile.png')
 
     def test_model_should_have_created_and_updated_fields(self):
         #Given
