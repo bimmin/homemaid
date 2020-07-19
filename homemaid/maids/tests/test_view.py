@@ -73,9 +73,10 @@ class TestMaidAddView(TestCase):
 
     def test_view_should_have_maid_form(self):
         response = self.client.get(reverse('maid-add'))
-
-        print(response.content)
+    
         assert '<form action="." method="POST">' in str(response.content)
+
+        assert '<input type="hidden" name="csrfmiddlewaretoken"' in str(response.content)
 
         name_field = '<input type="text" name="name" maxlength="300" required id="id_name">'
         assert name_field in str(response.content)
